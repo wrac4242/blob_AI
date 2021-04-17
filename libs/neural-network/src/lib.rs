@@ -12,32 +12,27 @@ struct Neuron {
 }
 
 impl Network {
-    pub fn propagate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
+    pub fn propagate(&self, inputs: Vec<f32>) -> Vec<f32> {
         //send the input to the next layer, where it processes it, after looping through all layers, return input
-        for layer in &self.layers {
-            inputs = layer.propagate(inputs);
-        }
-
-        inputs
+        self.layers.iter().fold(inputs, |inputs, layer| layer.propagate(inputs))
     }
 }
 
 impl Layer {
-    fn propagate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
+    fn propagate(&self, inputs: Vec<f32>) -> Vec<f32> {
         //loops over each neuron in the layer, gives it the input, and expects a f32 from it
-        let mut outputs = Vec::with_capacity(self.neurons.len());
-
-        for neuron in &self.neurons {
-            let output = neuron.propagate(&inputs);
-            outputs.push(output);
-        }
-        outputs
+        self.neurons
+            .iter()
+            .map(|neurons| neurons.propagate(&inputs))
+            .collect()
     }
 }
 
 impl Neuron {
     fn propagate(&self, inputs: &[f32]) -> f32 {
         //loops over all the input values, multiplies it by the given weight, and then adds bias
+        assert_eq!(inputs.len(), self.weights.len());
+
         let output = inputs
             .iter()
             .zip(&self.weights)
