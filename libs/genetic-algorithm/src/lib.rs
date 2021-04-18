@@ -1,5 +1,6 @@
 #![feature(min_type_alias_impl_trait)]
 
+//1.53.0-nightly cant compile, https://github.com/rust-lang/rust/issues/84300
 use rand::RngCore;
 use rand::seq::SliceRandom;
 use std::ops::Index;
