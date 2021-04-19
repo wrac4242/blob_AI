@@ -22,7 +22,6 @@ pub trait SelectionMethod {
         I: Individual;
 }
 
-
 pub struct RouletteWheelSelection;
 
 impl RouletteWheelSelection {
