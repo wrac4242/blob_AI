@@ -1,6 +1,5 @@
 #![feature(min_type_alias_impl_trait)]
 
-//1.53.0-nightly cant compile, https://github.com/rust-lang/rust/issues/84300
 use rand::RngCore;
 use rand::seq::SliceRandom;
 use std::ops::Index;
@@ -284,7 +283,6 @@ mod tests {
         }
     }
 
-    use std::iter::FromIterator;
     use std::collections::BTreeMap;
     use maplit::btreemap;
 
@@ -596,8 +594,6 @@ mod chromosome_tests {
             assert_eq!(genes[2], &20.0);
         }
     }
-
-    use super::*;
 
     mod index {
         use super::*;
